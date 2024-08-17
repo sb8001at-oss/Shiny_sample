@@ -396,15 +396,15 @@ server <- function(input, output) {
     )
     
     output$code_server_reactive1 <- renderText(
-        "n1_wrap <- reactive(rpois(input$n1, 5))\n
+        "n1_wrap <- reactive(rpois(input$n1, 5))
         n2_wrap <- reactive(rpois(input$n2, 5))\n
         
-        output$rpois_value <- renderText(\n
-            paste(\"rpois1: \", mean(n1_wrap()), \", rpois2: \", mean(n2_wrap(), sep = \"\"))\n
+        output$rpois_value <- renderText(
+            paste(\"rpois1: \", mean(n1_wrap()), \", rpois2: \", mean(n2_wrap(), sep = \"\"))
         )\n
         
-        output$rpois_value2 <- renderText(\n
-            paste(\"rpois1: \", mean(input$n1 |> rpois(5)), \", rpois2: \", mean(input$n2 |> rpois(5)), sep = \"\")\n
+        output$rpois_value2 <- renderText(
+            paste(\"rpois1: \", mean(input$n1 |> rpois(5)), \", rpois2: \", mean(input$n2 |> rpois(5)), sep = \"\")
         )"
     )
 }
