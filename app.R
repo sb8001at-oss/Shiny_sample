@@ -1,5 +1,5 @@
-library(shiny)
-library(tidyverse)
+if(!require(shiny)) install.packages("shiny")
+if(!require(tidyverse)) install.packages("tidyverse")
 
 fruits <- c("banana", "apple", "orange")
 
@@ -255,6 +255,36 @@ ui <- fluidPage(
                     )
                 )
             )
+        ),
+        tabPanel("reactiveの仕組み",
+            sidebarLayout(
+                sidebarPanel(
+                    sliderInput("n1",
+                                "N of rpois 1:",
+                                min = 10000,
+                                max = 500000,
+                                value = 15000),
+                    sliderInput("n2",
+                                "N of rpois 2:",
+                                min = 10000,
+                                max = 500000,
+                                value = 15000)
+                ),
+                
+                mainPanel(
+                    p("reactiveあり：片方を動かすと片方のみ値が変わる"),
+                    verbatimTextOutput("rpois_value"),
+                    hr(),
+                    p("reactiveなし：片方を動かすと両方の値が変わる"),
+                    verbatimTextOutput("rpois_value2"),
+                    hr(),
+                    p("uiのコード"),
+                    verbatimTextOutput("code_ui_reactive1"),
+                    hr(),
+                    p("serverのコード"),
+                    verbatimTextOutput("code_server_reactive1")
+                )
+            )
         )
     )
 )
@@ -340,6 +370,43 @@ server <- function(input, output) {
         rows <- iris[sample(1:nrow(iris), input$i_rows), c(1, 5)]\n
         })"
     })
+    
+    n1_wrap <- reactive(rpois(input$n1, 5))
+    n2_wrap <- reactive(rpois(input$n2, 5))
+    
+    output$rpois_value <- renderText(
+        paste("rpois1: ", mean(n1_wrap()), ", rpois2: ", mean(n2_wrap(), sep = ""))
+    )
+    
+    output$rpois_value2 <- renderText(
+        paste("rpois1: ", mean(input$n1 |> rpois(5)), ", rpois2: ", mean(input$n2 |> rpois(5)), sep = "")
+    )
+    
+    output$code_ui_reactive1 <- renderText(
+        "sliderInput(\"n1\",
+            \"N of rpois 1:\",
+            min = 10000,
+            max = 500000,
+            value = 15000),\n
+        sliderInput(\"n2\",
+            \"N of rpois 2:\",
+            min = 10000,
+            max = 500000,
+            value = 15000)"
+    )
+    
+    output$code_server_reactive1 <- renderText(
+        "n1_wrap <- reactive(rpois(input$n1, 5))\n
+        n2_wrap <- reactive(rpois(input$n2, 5))\n
+        
+        output$rpois_value <- renderText(\n
+            paste(\"rpois1: \", mean(n1_wrap()), \", rpois2: \", mean(n2_wrap(), sep = \"\"))\n
+        )\n
+        
+        output$rpois_value2 <- renderText(\n
+            paste(\"rpois1: \", mean(input$n1 |> rpois(5)), \", rpois2: \", mean(input$n2 |> rpois(5)), sep = \"\")\n
+        )"
+    )
 }
 
 shinyApp(ui = ui, server = server)
