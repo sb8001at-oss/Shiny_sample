@@ -235,13 +235,13 @@ ui <- fluidPage(
                            
                            hr(),
                            p("画像"),
-                           p(code("img(src=\"https://www.rstudio.com/wp-content/uploads/2018/10/RStudio-Logo-Flat.png\", width = \"100\")")),
-                           img(src="https://www.rstudio.com/wp-content/uploads/2018/10/RStudio-Logo-Flat.png", width = "100"),
+                           p(code("img(src=\"./www/IMG0719.JPG", width = \"100\")")),
+                           img(src="./www/IMG0719.JPG", width = "100"),
                            
                            hr(),
                            p("リンク付き画像"),
-                           p(code("a(href = \"https://posit.co/\", img(src=\"https://www.rstudio.com/wp-content/uploads/2018/10/RStudio-Logo-Flat.png\", width = \"100\"))")),
-                           a(href = "https://posit.co/", img(src="https://www.rstudio.com/wp-content/uploads/2018/10/RStudio-Logo-Flat.png", width = "100")),
+                           p(code("a(href = \"https://www.todaiji.or.jp/\", img(src=\"./www/IMG0719.JPG\", width = \"100\"))")),
+                           a(href = "https://www.todaiji.or.jp/", img(src="./www/IMG0719.JPG", width = "100")),
                            hr(),
                            
                            p(code("HTML(\"<p>HTML直打ち</p>\")")),
