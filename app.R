@@ -235,13 +235,13 @@ ui <- fluidPage(
                            
                            hr(),
                            p("画像"),
-                           p(code("img(src=\"./www/IMG0719.JPG", width = \"100\")")),
-                           img(src="./www/IMG0719.JPG", width = "100"),
+                           p(code("img(src=\"./www/IMGP0719.JPG\", width = \"300\")")),
+                           img(src="IMGP0719.JPG", width = "300"),
                            
                            hr(),
                            p("リンク付き画像"),
-                           p(code("a(href = \"https://www.todaiji.or.jp/\", img(src=\"./www/IMG0719.JPG\", width = \"100\"))")),
-                           a(href = "https://www.todaiji.or.jp/", img(src="./www/IMG0719.JPG", width = "100")),
+                           p(code("a(href = \"https://www.todaiji.or.jp/\", img(src=\"./www/DSC00467.JPG\", width = 300\"))")),
+                           a(href = "https://www.todaiji.or.jp/", img(src="DSC00467.JPG", width = "300")),
                            hr(),
                            
                            p(code("HTML(\"<p>HTML直打ち</p>\")")),
